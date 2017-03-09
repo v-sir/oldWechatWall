@@ -60,7 +60,7 @@ class index extends admin {
         else{
 
                 $sql="select* from admin where UserName='$username'";
-                $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+                $db_conn=new mysqli('localhost','root','','new_wechat');
                 if ($db_conn->connect_error) {
                     include $this->admin_tpl('login');
                     echo"<script>alert('error:Database connection failed!')</script>";
@@ -126,7 +126,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
 
             $sql="delete from topic where tp_id='$tp_id'";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root',','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -156,7 +156,7 @@ class index extends admin {
             $time=time();
             $sql="insert into topic(topic,imgURL,logoURL,create_at,announcer,ad,status)
             value('$topic','$imgURL','$logoURL','$time','$_SESSION[username]','$ad',1)";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root','','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -178,7 +178,7 @@ class index extends admin {
     if(isset($_SESSION['loginstatus'])){
         if(isset( $tp_id) && $tp_id!=''){
             $sql="update topic set status=0 where tp_id='$tp_id'";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root','','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -230,7 +230,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
 
             $sql="update topic set status=1 where tp_id='$tp_id'";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root','','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -253,7 +253,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
 
             $sql="delete from message where id='$id'";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root','','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -283,7 +283,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
 
             $sql="update message set display=1 where id='$id'";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root','','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -312,7 +312,7 @@ class index extends admin {
             if($auto==1){
                 for($i=1; ;$i++){
                     $sql="select *from message where display=0 && tp_id='$tp_id'";
-                    $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+                    $db_conn=new mysqli('localhost','root','','new_wechat');
                     if ($db_conn->connect_error) {
                         echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -351,7 +351,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
 
             $sql="update message set display=0 where id='$id'";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root','','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -384,7 +384,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
             for($num=0;$num<count($id);$num++){
                $sql="update message set display=1 where id='$id[$num]'";
-                $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+                $db_conn=new mysqli('localhost','root','','new_wechat');
                 if ($db_conn->connect_error) {
                     echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -424,7 +424,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
             for($num=0;$num<count($id);$num++){
                 $sql="update message set display=0 where id='$id[$num]'";
-                $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+                $db_conn=new mysqli('localhost','root','','new_wechat');
                 if ($db_conn->connect_error) {
                     echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -457,7 +457,7 @@ class index extends admin {
         if(isset($_SESSION['loginstatus'])){
 
             $sql="delete from Awards where id='$id'";
-            $db_conn=new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+            $db_conn=new mysqli('localhost','root','','new_wechat');
             if ($db_conn->connect_error) {
                 echo"<script>alert('error:Database connection failed!')</script>";
 
@@ -486,36 +486,36 @@ class index extends admin {
             'image/x-png'
         );
 
-        $max_file_size=2000000;     //ÉÏ´«ÎÄ¼ş´óĞ¡ÏŞÖÆ, µ¥Î»BYTE
-        $destination_folder="uploadimg/"; //ÉÏ´«ÎÄ¼şÂ·¾¶
-        $watermark=0;      //ÊÇ·ñ¸½¼ÓË®Ó¡(1Îª¼ÓË®Ó¡,ÆäËûÎª²»¼ÓË®Ó¡);
-        $watertype=1;      //Ë®Ó¡ÀàĞÍ(1ÎªÎÄ×Ö,2ÎªÍ¼Æ¬)
-        $waterposition=1;     //Ë®Ó¡Î»ÖÃ(1Îª×óÏÂ½Ç,2ÎªÓÒÏÂ½Ç,3Îª×óÉÏ½Ç,4ÎªÓÒÉÏ½Ç,5Îª¾ÓÖĞ);
-        $waterstring="http://www.xplore.cn/";  //Ë®Ó¡×Ö·û´®
-        $waterimg="xplore.gif";    //Ë®Ó¡Í¼Æ¬
-        $imgpreview=0;      //ÊÇ·ñÉú³ÉÔ¤ÀÀÍ¼(1ÎªÉú³É,ÆäËûÎª²»Éú³É);
-        $imgpreviewsize=1/2;    //ËõÂÔÍ¼±ÈÀı
+        $max_file_size=2000000;     //ä¸Šä¼ æ–‡ä»¶å¤§å°é™åˆ¶, å•ä½BYTE
+        $destination_folder="uploadimg/"; //ä¸Šä¼ æ–‡ä»¶è·¯å¾„
+        $watermark=0;      //æ˜¯å¦é™„åŠ æ°´å°(1ä¸ºåŠ æ°´å°,å…¶ä»–ä¸ºä¸åŠ æ°´å°);
+        $watertype=1;      //æ°´å°ç±»å‹(1ä¸ºæ–‡å­—,2ä¸ºå›¾ç‰‡)
+        $waterposition=1;     //æ°´å°ä½ç½®(1ä¸ºå·¦ä¸‹è§’,2ä¸ºå³ä¸‹è§’,3ä¸ºå·¦ä¸Šè§’,4ä¸ºå³ä¸Šè§’,5ä¸ºå±…ä¸­);
+        $waterstring="http://www.xplore.cn/";  //æ°´å°å­—ç¬¦ä¸²
+        $waterimg="xplore.gif";    //æ°´å°å›¾ç‰‡
+        $imgpreview=0;      //æ˜¯å¦ç”Ÿæˆé¢„è§ˆå›¾(1ä¸ºç”Ÿæˆ,å…¶ä»–ä¸ºä¸ç”Ÿæˆ);
+        $imgpreviewsize=1/2;    //ç¼©ç•¥å›¾æ¯”ä¾‹
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             if (!is_uploaded_file($_FILES["upfile"]['tmp_name']))
-                //ÊÇ·ñ´æÔÚÎÄ¼ş
+                //æ˜¯å¦å­˜åœ¨æ–‡ä»¶
             {
-                echo "Í¼Æ¬²»´æÔÚ!";
+                echo "å›¾ç‰‡ä¸å­˜åœ¨!";
                 exit;
             }
 
             $file = $_FILES["upfile"];
             if($max_file_size < $file["size"])
-                //¼ì²éÎÄ¼ş´óĞ¡
+                //æ£€æŸ¥æ–‡ä»¶å¤§å°
             {
-                echo "ÎÄ¼şÌ«´ó!";
+                echo "æ–‡ä»¶å¤ªå¤§!";
                 exit;
             }
 
             if(!in_array($file["type"], $uptypes))
-                //¼ì²éÎÄ¼şÀàĞÍ
+                //æ£€æŸ¥æ–‡ä»¶ç±»å‹
             {
-                echo "ÎÄ¼şÀàĞÍ²»·û!".$file["type"];
+                echo "æ–‡ä»¶ç±»å‹ä¸ç¬¦!".$file["type"];
                 exit;
             }
 
@@ -531,19 +531,19 @@ class index extends admin {
             $destination = $destination_folder.time().".".$ftype;
             if (file_exists($destination) && $overwrite != true)
             {
-                echo "Í¬ÃûÎÄ¼şÒÑ¾­´æÔÚÁË";
+                echo "åŒåæ–‡ä»¶å·²ç»å­˜åœ¨äº†";
                 exit;
             }
 
             if(!move_uploaded_file ($filename, $destination))
             {
-                echo "ÒÆ¶¯ÎÄ¼ş³ö´í";
+                echo "ç§»åŠ¨æ–‡ä»¶å‡ºé”™";
                 exit;
             }
 
             $pinfo=pathinfo($destination);
             $fname=$pinfo['basename'];
-            echo " <script>alert('ÒÑ¾­³É¹¦ÉÏ´«')</script>";
+            echo " <script>alert('å·²ç»æˆåŠŸä¸Šä¼ ')</script>";
 
 
             if($watermark==1)
@@ -569,7 +569,7 @@ class index extends admin {
                         $simage =imagecreatefromwbmp($destination);
                         break;
                     default:
-                        die("²»Ö§³ÖµÄÎÄ¼şÀàĞÍ");
+                        die("ä¸æ”¯æŒçš„æ–‡ä»¶ç±»å‹");
                         exit;
                 }
 
@@ -578,10 +578,10 @@ class index extends admin {
 
                 switch($watertype)
                 {
-                    case 1:   //¼ÓË®Ó¡×Ö·û´®
+                    case 1:   //åŠ æ°´å°å­—ç¬¦ä¸²
                         imagestring($nimage,2,3,$image_size[1]-15,$waterstring,$black);
                         break;
-                    case 2:   //¼ÓË®Ó¡Í¼Æ¬
+                    case 2:   //åŠ æ°´å°å›¾ç‰‡
                         $simage1 =imagecreatefromgif("xplore.gif");
                         imagecopy($nimage,$simage1,0,0,0,0,85,15);
                         imagedestroy($simage1);
@@ -606,16 +606,16 @@ class index extends admin {
                         break;
                 }
 
-                //¸²¸ÇÔ­ÉÏ´«ÎÄ¼ş
+                //è¦†ç›–åŸä¸Šä¼ æ–‡ä»¶
                 imagedestroy($nimage);
                 imagedestroy($simage);
             }
 
           // if($imgpreview==1)
          //   {
-            //    echo "<br>Í¼Æ¬Ô¤ÀÀ:<br>";
+            //    echo "<br>å›¾ç‰‡é¢„è§ˆ:<br>";
             //    echo "<img src=\"".$destination."\" width=".($image_size[0]*$imgpreviewsize)." height=".($image_size[1]*$imgpreviewsize);
-           // //    echo " alt=\"Í¼Æ¬Ô¤ÀÀ:\rÎÄ¼şÃû:".$destination."\rÉÏ´«Ê±¼ä:\">";
+           // //    echo " alt=\"å›¾ç‰‡é¢„è§ˆ:\ræ–‡ä»¶å:".$destination."\rä¸Šä¼ æ—¶é—´:\">";
             //}
         }
     }
