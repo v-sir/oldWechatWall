@@ -141,7 +141,7 @@ class wechat {
        // $resultStr = sprintf($eventTpl, $fromUsername, $toUsername, time(), $uuid, $major,$minor,$Distance,$uuid, $major,$minor,$Distance);
        // echo $resultStr;
         $time=time();
-        $this->db_conn = new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+        $this->db_conn = new mysqli('localhost','root','','new_wechat');
         $this->db_conn->query("set names UTF8");
         $this->sql = "insert into shake(create_at,openid,distance) values('$time','$this->openid','$Distance')";
         $this->db_result = $this->db_conn->query($this->sql);
@@ -184,7 +184,7 @@ class wechat {
                          if(substr_count($keyword,$topic) ||substr_count($keyword,$topic2)){
                                 $this->msg=$keyword;
                              $time=time();
-                             $this->db_conn = new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+                             $this->db_conn = new mysqli('localhost','root','','new_wechat');
                              $this->db_conn->query("set names UTF8");
                              $this->sql = "insert into message(msg,tp_id,msg_type,create_at,openid) values('$this->msg','$tp_id',0,'$time','$this->openid')";
                              if($this->db_result = $this->db_conn->query($this->sql))
@@ -254,7 +254,7 @@ class wechat {
 
 
                     $time=time();
-                    $this->db_conn = new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+                    $this->db_conn = new mysqli('localhost','root','','new_wechat');
                     $this->db_conn->query("set names UTF8");
                     $this->sql = "insert into image(create_at,openid,imageUrl) values('$time','$this->openid')";
                     if($this->db_result = $this->db_conn->query($this->sql))
@@ -277,7 +277,7 @@ class wechat {
 
     }
     public function is_existUserinfo(){
-        $this->db_conn = new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+        $this->db_conn = new mysqli('localhost','root','','new_wechat');
         $this->sql="select*from user where openid='$this->openid'";
         if ($this->db_conn) {
             $this->db_result = $this->db_conn->query($this->sql);
@@ -299,7 +299,7 @@ class wechat {
         $strjson=json_decode($a);
         $this->sql="insert into user(openid,nickname,headimgurl,sex,display) values('$strjson->openid','$strjson->nickname','$strjson->headimgurl','$strjson->sex','F')";
 
-        $this->db_conn = new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+        $this->db_conn = new mysqli('localhost','root','','new_wechat');
         $this->db_conn->query("set names UTF8");
         if ($this->db_conn) {
             if($this->db_result = $this->db_conn->query($this->sql)){
