@@ -64,7 +64,7 @@ class shake{
 
     }
     public function is_existUserinfo(){
-        $this->db_conn = new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+        $this->db_conn = new mysqli('localhost','root','','new_wechat');
         $this->sql="select*from shake_user where openid='$this->openid'";
         if ($this->db_conn) {
             $this->db_result = $this->db_conn->query($this->sql);
@@ -86,7 +86,7 @@ class shake{
         $strjson=json_decode($a);
         $this->sql="insert into shake_user(openid,nickname,headimgurl,sex) values('$strjson->openid','$strjson->nickname','$strjson->headimgurl','$strjson->sex')";
 
-        $this->db_conn = new mysqli('localhost','root','NIUBSky3!.comr720','new_wechat');
+        $this->db_conn = new mysqli('localhost','root','','new_wechat');
         $this->db_conn->query("set names UTF8");
         if ($this->db_conn) {
             if($this->db_result = $this->db_conn->query($this->sql)){
